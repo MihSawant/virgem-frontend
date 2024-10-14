@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Table from "./Table";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Filters = () => {
+  const navigate = useNavigate();
   const [filterData, setFilterData] = useState(null); // Stores data fetched from API
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedShapes, setSelectedShapes] = useState([]);
@@ -38,6 +40,8 @@ const Filters = () => {
   const [crownAngleTo, setCrownAngleTo] = useState("");
   const [result, setResult] = useState([]);
   const [showTable, setShowTable] = useState(false);
+  const [caratRangeFrom, setCaratRangeFrom] = useState("");
+  const [caratRangeTo, setCaratRangeTo] = useState("");
   
   // Range input fields state (example given for table percent, other filters to be added similarly)
   const [tablePercent, setTablePercent] = useState({ from: "", to: "" });
@@ -77,7 +81,7 @@ const Filters = () => {
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/filters/all-data");
+        const response = await fetch("http://localhost:8081/api/filters/all-data");
         if (!response.ok) throw new Error("Failed to fetch filter data");
         
         const { data } = await response.json();
@@ -115,7 +119,7 @@ const Filters = () => {
     console.log("Filter Data to Submit:", filterSelection);
 
     try {
-      const response = await fetch("http://localhost:8000/api/filters/to-filter", {
+      const response = await fetch("http://localhost:8081/api/filters/to-filter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(filterSelection),
@@ -123,7 +127,8 @@ const Filters = () => {
       if (!response.ok) throw new Error("Failed to apply filters");
       const result = await response.json();
       setResult(result);
-      setShowTable(true);
+      navigate("/table", {state : {filters : result.data}})
+      // setShowTable(true);
       console.log("Filters applied:", result);
     } catch (error) {
       console.error("Error applying filters:", error);
@@ -201,9 +206,36 @@ const Filters = () => {
               )}
 
               {/* Carat Range Filter */}
+              
               {true && (
                 <div className="caratRange filter_fields">
                   <h3 className="section-title">Carat Range</h3>
+                  <div className="table_percent filter_fields">
+                <div className="group-field">
+          <div className="from_field">
+            <label htmlFor="total_depth_from">From</label>
+            <input
+              name="total_depth_from"
+              className="input-field"
+              type="text"
+              value={caratRangeFrom}
+              id="total_depth_from"
+              onChange={(e) => setCaratRangeFrom(e.target.value)}
+            />
+          </div>
+          <div className="to_field">
+            <label htmlFor="total_depth_to">To</label>
+            <input
+              name="total_depth_to"
+              className="input-field"
+              type="text"
+              value={caratRangeTo}
+              id="total_depth_to"
+              onChange={(e) => setCaratRangeTo(e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
                   <ul className="rap_data_select">
                     {['0.150 - 0.179', '0.300-0.349', '0.400-0.459', '0.500-0.589', '0.700-0.719', '0.900-0.959', '1.000-199', '2.000-2.499', 
                     '3.000-3.499', '5.000-5.499', '0.180-0.229', '0.350-0.379', '0.460-0.499', '0.590-0.649', '0.720-0.749', '0.960-0.999',

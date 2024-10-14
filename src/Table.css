@@ -1,13 +1,44 @@
+/* In Table.css */
 .table-container {
   margin: 20px;
+  overflow-x: auto; /* Enables horizontal scrolling */
+  width: 100%; /* Ensures it spans the available width */
 }
 
-h3 {
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
   color: #1b2356;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.btn-primary:hover {
+  background-color: #162041;
+}
+
+
+.export-button {
+  position: sticky;
+  top: 0;
+  background-color: #1b2356;
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+}
+
+
+
+.export-button:hover {
+  background-color: #333a80; /* Slightly darker shade */
 }
 
 table {
-  width: 100%;
+  width: max-content; /* Expands table to fit its content */
   border-collapse: collapse;
   color: #1b2356;
 }
@@ -16,22 +47,5 @@ th, td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
-}
-
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-a {
-  color: #1b2356;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+  white-space: nowrap; /* Prevents text from wrapping, keeping columns narrow */
 }
