@@ -4,6 +4,61 @@
   max-width: 100%; /* Container will stay within page width */
   white-space: nowrap; /* Prevent table cells from wrapping, which can cause overflow */
 }
+/* Navbar background for contrast */
+.site-header {
+  background: linear-gradient(60deg, #1b2356 ,#2c3e85, #6a77a8, #d1d4e9, #1b2356);
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Navbar link styling */
+.site-header .main-navigation a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin: 0 15px;
+}
+
+.site-header .main-navigation a:hover {
+  color: #1b2356;
+}
+
+/* Diamond logo container with gradient glow */
+.diamond-logo-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(27, 35, 86, 0.3), transparent); /* Gradient glow */
+  border-radius: 50%; /* Rounded for halo effect */
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), /* Soft outer glow */
+              0 0 30px rgba(255, 255, 255, 0.2); /* Dispersed glow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Enhance the gradient glow on hover */
+.diamond-logo-container:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.6), /* Brighter outer glow */
+              0 0 40px rgba(255, 255, 255, 0.3);
+  transform: scale(1.05); /* Slight upscale for interactivity */
+}
+
+/* Diamond-shaped logo */
+.diamond-logo {
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Diamond shape */
+  background-color: white;
+}
+
+
+
+
+
+
+
 
 
 
